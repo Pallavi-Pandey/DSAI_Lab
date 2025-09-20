@@ -1,6 +1,6 @@
 # QuizMaster - Interactive Quiz Platform
 
-A comprehensive, modern quiz application built with Flask and vanilla JavaScript featuring user authentication, real-time leaderboards, and a beautiful responsive interface.
+A modern full-stack quiz application built with FastAPI backend and React frontend, featuring user authentication, real-time leaderboards, and a beautiful responsive interface.
 
 ## 🌟 Features
 
@@ -31,43 +31,77 @@ A comprehensive, modern quiz application built with Flask and vanilla JavaScript
 
 ### Prerequisites
 - Python 3.8+
-- pip package manager
+- Node.js 16+
+- npm or yarn
 
-### Installation
+### Backend Setup
 
-1. **Clone the repository**
+1. **Navigate to the backend directory**
    ```bash
-   git clone <repository-url>
-   cd DSAI_Lab
+   cd backend
    ```
 
-2. **Install dependencies**
+2. **Create and activate virtual environment**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. **Install Python dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Run the application**
+4. **Initialize database with sample data**
    ```bash
-   python app.py
+   python sample_data.py
    ```
 
-4. **Access the application**
-   Open your browser and navigate to `http://127.0.0.1:5000`
+5. **Start the FastAPI backend**
+   ```bash
+   python main.py
+   ```
+   Backend will be available at `http://localhost:8000`
+
+### Frontend Setup
+
+1. **Navigate to the frontend directory**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install Node.js dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the React development server**
+   ```bash
+   npm start
+   ```
+   Frontend will be available at `http://localhost:3000`
 
 ## 📁 Project Structure
 
 ```
 DSAI_Lab/
-├── app.py                 # Flask application and API routes
-├── requirements.txt       # Python dependencies
-├── templates/
-│   └── index.html        # Main HTML template
-├── static/
-│   ├── css/
-│   │   └── style.css     # Application styles
-│   └── js/
-│       └── app.js        # Frontend JavaScript application
-└── README.md             # This file
+├── backend/                 # FastAPI backend
+│   ├── app.py              # Main application with API endpoints
+│   ├── config.py           # Configuration settings
+│   ├── main.py             # Application entry point
+│   ├── sample_data.py      # Sample quiz data
+│   └── requirements.txt    # Python dependencies
+├── frontend/               # React frontend
+│   ├── public/             # Static assets
+│   ├── src/
+│   │   ├── components/     # React components (Navbar, Modals)
+│   │   ├── pages/          # Page components (Home, Quizzes, etc.)
+│   │   ├── services/       # Authentication context
+│   │   └── styles/         # CSS styles
+│   └── package.json        # Node dependencies
+├── static/                 # Legacy static files
+├── templates/              # Legacy templates  
+└── README.md              # This file
 ```
 
 ## 🎮 How to Use
