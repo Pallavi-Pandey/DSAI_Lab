@@ -64,6 +64,24 @@ main {
   color: white;
 }
 
+.quiz-action-btn.export-btn {
+  background: #f59e0b;
+  color: white;
+}
+
+.quiz-action-btn.export-btn:hover {
+  background: #d97706;
+}
+
+.quiz-action-btn.collaboration-btn {
+  background: #8b5cf6;
+  color: white;
+}
+
+.quiz-action-btn.collaboration-btn:hover {
+  background: #7c3aed;
+}
+
 .btn-success {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
@@ -724,6 +742,291 @@ main {
   gap: 1rem;
   justify-content: center;
   margin-top: 2rem;
+}
+
+/* Quiz Controls Styling */
+.quiz-controls {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.search-container svg {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 50px 12px 45px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.clear-search {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.clear-search:hover {
+  background-color: #f5f5f5;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-container svg {
+  color: #666;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.reset-filters {
+  background: #f8f9fa;
+  color: #666;
+  border: 1px solid #e1e5e9;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.reset-filters:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.results-info {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.filter-indicator {
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* Quiz Actions */
+.quiz-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.quiz-actions .btn-primary {
+  flex: 1;
+}
+
+.quiz-actions .share-btn,
+.quiz-actions .analytics-btn,
+.quiz-actions .export-btn {
+  min-width: 40px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.header-content h1 {
+  margin-bottom: 8px;
+}
+
+.header-content p {
+  margin: 0;
+  color: #666;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: transparent;
+  border: 2px solid #e1e5e9;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.theme-toggle:hover {
+  border-color: #667eea;
+  color: #667eea;
+  transform: scale(1.05);
+}
+
+.profile-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background: #1a1a1a;
+  color: #e1e1e1;
+}
+
+.dark-mode .navbar {
+  background: #2d2d2d;
+  border-bottom-color: #404040;
+}
+
+.dark-mode .nav-link {
+  color: #e1e1e1;
+}
+
+.dark-mode .nav-link:hover {
+  color: #667eea;
+}
+
+.dark-mode .hero-section {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+}
+
+.dark-mode .quiz-card,
+.dark-mode .achievement-system,
+.dark-mode .quiz-controls,
+.dark-mode .results-header,
+.dark-mode .performance-analytics,
+.dark-mode .detailed-results,
+.dark-mode .results-actions {
+  background: #2d2d2d;
+  border-color: #404040;
+}
+
+.dark-mode .quiz-card h3,
+.dark-mode .achievement-system h3,
+.dark-mode .detailed-results h3 {
+  color: #e1e1e1;
+}
+
+.dark-mode .quiz-card p,
+.dark-mode .quiz-description {
+  color: #b3b3b3;
+}
+
+.dark-mode .search-input,
+.dark-mode .filter-select {
+  background: #404040;
+  border-color: #555;
+  color: #e1e1e1;
+}
+
+.dark-mode .search-input::placeholder {
+  color: #888;
+}
+
+.dark-mode .achievement-card {
+  background: #404040;
+  border-color: #555;
+}
+
+.dark-mode .achievement-card.earned {
+  background: linear-gradient(135deg, #1a4d3a 0%, #2d5a3d 100%);
+}
+
+.dark-mode .analytics-card {
+  background: #404040;
+  border-color: #555;
+}
+
+.dark-mode .question-result {
+  background: #404040;
+  border-color: #555;
+}
+
+.dark-mode .question-text {
+  color: #e1e1e1;
+}
+
+.dark-mode .option {
+  background: #4a4a4a;
+  border-color: #666;
+  color: #e1e1e1;
+}
+
+.dark-mode .theme-toggle {
+  border-color: #555;
+  color: #e1e1e1;
 }
 
 /* Responsive Design */

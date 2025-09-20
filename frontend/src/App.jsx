@@ -3,11 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './services/AuthContext';
 import Navbar from './components/Navbar.jsx';
-import Home from './pages/Home.jsx';
-import Quizzes from './pages/Quizzes.jsx';
-import Quiz from './pages/Quiz.jsx';
-import Leaderboard from './pages/Leaderboard.jsx';
-import Profile from './pages/Profile.jsx';
+import Home from './pages/Home';
+import Quizzes from './pages/Quizzes';
+import Quiz from './pages/Quiz';
+import CreateQuiz from './pages/CreateQuiz';
+import QuizResults from './pages/QuizResults';
+import QuizHistory from './pages/QuizHistory';
+import './pages/QuizHistory.css';
+import QuizAnalytics from './pages/QuizAnalytics';
+import './pages/QuizAnalytics.css';
+import Leaderboard from './pages/Leaderboard';
+import Profile from './pages/Profile';
 import './styles/App.css';
 import './styles/Quiz.css';
 
@@ -22,6 +28,10 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/quizzes" element={<Quizzes />} />
               <Route path="/quiz/:id" element={<Quiz />} />
+              <Route path="/create-quiz" element={<CreateQuiz />} />
+              <Route path="/quiz-results" element={<QuizResults />} />
+              <Route path="/quiz-history" element={<QuizHistory />} />
+              <Route path="/quiz-analytics/:quizId" element={<QuizAnalytics />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/profile" element={<Profile />} />
             </Routes>

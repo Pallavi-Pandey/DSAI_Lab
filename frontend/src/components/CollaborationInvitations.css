@@ -1,0 +1,314 @@
+.collaboration-invitations {
+  position: relative;
+  display: inline-block;
+}
+
+.invitations-bell {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invitations-bell:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.invitations-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 380px;
+  max-height: 500px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  z-index: 1000;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-header {
+  padding: 16px 20px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dropdown-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 1rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.invitations-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.invitation-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s ease;
+}
+
+.invitation-item:hover {
+  background: #f9fafb;
+}
+
+.invitation-item:last-child {
+  border-bottom: none;
+}
+
+.invitation-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.invitation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quiz-title {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.9rem;
+}
+
+.invitation-details p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.role-badge {
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.invitation-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.invitation-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: 12px;
+}
+
+.action-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 0;
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-button.accept {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.action-button.accept:hover:not(:disabled) {
+  background: #bbf7d0;
+  color: #15803d;
+  transform: translateY(-1px);
+}
+
+.action-button.decline {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.action-button.decline:hover:not(:disabled) {
+  background: #fee2e2;
+  color: #b91c1c;
+  transform: translateY(-1px);
+}
+
+.no-invitations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.no-invitations svg {
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.no-invitations p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Dark mode support */
+.dark .invitations-bell {
+  color: #9ca3af;
+}
+
+.dark .invitations-bell:hover {
+  background: #374151;
+  color: #e5e7eb;
+}
+
+.dark .invitations-dropdown {
+  background: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.dark .dropdown-header {
+  background: #111827;
+  border-bottom-color: #374151;
+}
+
+.dark .dropdown-header h3 {
+  color: #f9fafb;
+}
+
+.dark .invitation-item {
+  border-bottom-color: #374151;
+}
+
+.dark .invitation-item:hover {
+  background: #111827;
+}
+
+.dark .quiz-title {
+  color: #f9fafb;
+}
+
+.dark .invitation-details p {
+  color: #d1d5db;
+}
+
+.dark .invitation-meta {
+  color: #6b7280;
+}
+
+.dark .no-invitations {
+  color: #6b7280;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .invitations-dropdown {
+    width: 90vw;
+    max-width: 350px;
+    right: -20px;
+  }
+  
+  .invitation-item {
+    padding: 14px 16px;
+  }
+  
+  .invitation-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .action-button {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .invitations-dropdown {
+    width: 95vw;
+    right: -30px;
+  }
+  
+  .dropdown-header {
+    padding: 14px 16px;
+  }
+  
+  .invitation-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .invitation-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}

@@ -1,0 +1,354 @@
+.recommendations-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 40px 0;
+  margin: 20px 0;
+}
+
+.recommendations-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.recommendations-header h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #1e293b;
+  margin-bottom: 12px;
+  font-size: 2rem;
+}
+
+.recommendations-header p {
+  color: #64748b;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.user-insights {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skill-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.skill-icon {
+  font-size: 1.2rem;
+}
+
+.stats-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.recommendation-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+}
+
+.recommendation-badge {
+  position: absolute;
+  top: -8px;
+  right: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.confidence-icon {
+  display: flex;
+  align-items: center;
+}
+
+.quiz-content {
+  padding-top: 12px;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.quiz-header h3 {
+  color: #1e293b;
+  margin: 0;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.difficulty-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.quiz-description {
+  color: #64748b;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.recommendation-reason {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 4px solid #667eea;
+}
+
+.recommendation-reason span {
+  color: #475569;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 12px 0;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.meta-item span {
+  font-weight: 500;
+}
+
+.empty-recommendations {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.empty-recommendations h3 {
+  color: #1e293b;
+  margin: 16px 0 8px 0;
+}
+
+.empty-recommendations p {
+  color: #64748b;
+  margin-bottom: 24px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.recommendations-footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dark mode support */
+.dark .recommendations-section {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.dark .recommendation-card,
+.dark .empty-recommendations,
+.dark .user-insights {
+  background: #1e293b;
+  border-color: #374151;
+}
+
+.dark .recommendation-card:hover {
+  border-color: #667eea;
+}
+
+.dark .quiz-header h3,
+.dark .empty-recommendations h3,
+.dark .recommendations-header h2 {
+  color: #f1f5f9;
+}
+
+.dark .quiz-description,
+.dark .meta-item,
+.dark .stats-summary,
+.dark .empty-recommendations p,
+.dark .recommendations-header p {
+  color: #94a3b8;
+}
+
+.dark .recommendation-reason {
+  background: #334155;
+  border-left-color: #667eea;
+}
+
+.dark .recommendation-reason span {
+  color: #cbd5e1;
+}
+
+.dark .quiz-meta {
+  border-color: #374151;
+}
+
+.dark .recommendations-footer {
+  border-color: #374151;
+}
+
+.dark .spinner {
+  border-color: #374151;
+  border-top-color: #667eea;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .recommendations-section {
+    padding: 20px 0;
+  }
+  
+  .recommendations-header h2 {
+    font-size: 1.5rem;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .user-insights {
+    margin: 16px 20px 0 20px;
+  }
+  
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 20px;
+  }
+  
+  .recommendation-card {
+    padding: 20px;
+  }
+  
+  .quiz-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .quiz-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .recommendations-footer {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  
+  .recommendations-footer .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .skill-badge {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+  
+  .stats-summary {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+  
+  .recommendation-badge {
+    position: static;
+    margin-bottom: 12px;
+    align-self: flex-start;
+  }
+  
+  .quiz-content {
+    padding-top: 0;
+  }
+}

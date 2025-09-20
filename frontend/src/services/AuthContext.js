@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
@@ -17,26 +17,31 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
+  const fetchUserProfile = useCallback(async (username) => {
+    try {
+      if (username) {
+        const response = await fetch(`http://localhost:8000/user-profile/${username}`);
+        if (response.ok) {
+          const profileData = await response.json();
+          setUser(prev => ({ ...prev, ...profileData }));
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      fetchUserProfile();
+      // For demo purposes, just set loading to false
+      setLoading(false);
     } else {
       setLoading(false);
     }
   }, [token]);
-
-  const fetchUserProfile = async () => {
-    try {
-      const response = await axios.get('/api/users/me');
-      setUser(response.data);
-    } catch (error) {
-      console.error('Failed to fetch user profile:', error);
-      logout();
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const login = async (username, password) => {
     try {
@@ -44,7 +49,7 @@ export const AuthProvider = ({ children }) => {
       formData.append('username', username);
       formData.append('password', password);
 
-      const response = await axios.post('/token', formData, {
+      const response = await axios.post('http://localhost:8000/token', formData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -66,7 +71,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password) => {
     try {
-      const response = await axios.post('/register', {
+      const response = await axios.post('http://localhost:8000/register', {
         username,
         email,
         password,

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Brain, Menu, X, User, LogOut } from 'lucide-react';
+import { Brain, User, LogOut, Menu, X, Plus } from 'lucide-react';
 import { useAuth } from '../services/AuthContext';
+import CollaborationInvitations from './CollaborationInvitations';
+import './CollaborationInvitations.css';
 import LoginModal from './LoginModal.jsx';
 import RegisterModal from './RegisterModal.jsx';
 
@@ -38,6 +40,25 @@ const Navbar = () => {
             >
               Quizzes
             </Link>
+            {isAuthenticated && (
+              <>
+                <Link 
+                  to="/create-quiz" 
+                  className={`nav-link ${isActive('/create-quiz') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Plus size={16} />
+                  Create Quiz
+                </Link>
+                <Link 
+                  to="/quiz-history" 
+                  className={`nav-link ${isActive('/quiz-history') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  History
+                </Link>
+              </>
+            )}
             <Link 
               to="/leaderboard" 
               className={`nav-link ${isActive('/leaderboard') ? 'active' : ''}`}
@@ -56,16 +77,14 @@ const Navbar = () => {
                   <User size={16} />
                   Profile
                 </Link>
-                <button 
-                  className="nav-link logout-btn" 
-                  onClick={() => {
-                    logout();
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  <LogOut size={16} />
-                  Logout
-                </button>
+                <div className="nav-user">
+                  <CollaborationInvitations />
+                  <span>Welcome, {user?.username || 'User'}!</span>
+                  <button onClick={logout} className="logout-btn">
+                    <LogOut size={18} />
+                    Logout
+                  </button>
+                </div>
               </>
             ) : (
               <div className="auth-buttons">

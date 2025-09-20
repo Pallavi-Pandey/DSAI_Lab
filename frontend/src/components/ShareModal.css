@@ -1,0 +1,209 @@
+.share-modal {
+  max-width: 500px;
+  width: 90%;
+}
+
+.share-preview {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.share-preview h4 {
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 1.2em;
+}
+
+.share-preview p {
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.share-options {
+  margin-bottom: 25px;
+}
+
+.share-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+}
+
+.share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.share-button.twitter {
+  background: #1da1f2;
+}
+
+.share-button.twitter:hover {
+  background: #1991db;
+}
+
+.share-button.facebook {
+  background: #4267b2;
+}
+
+.share-button.facebook:hover {
+  background: #365899;
+}
+
+.share-button.whatsapp {
+  background: #25d366;
+}
+
+.share-button.whatsapp:hover {
+  background: #20bd5a;
+}
+
+.share-button.email {
+  background: #ea4335;
+}
+
+.share-button.email:hover {
+  background: #d23321;
+}
+
+.share-button.native {
+  background: #667eea;
+  grid-column: 1 / -1;
+  margin-top: 10px;
+}
+
+.share-button.native:hover {
+  background: #5a6fd8;
+}
+
+.share-link {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.share-link label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.link-container {
+  display: flex;
+  gap: 8px;
+}
+
+.link-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+}
+
+.copy-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.copy-button:hover {
+  background: #5a6fd8;
+}
+
+.copy-button.copied {
+  background: #10b981;
+}
+
+.copy-button.copied:hover {
+  background: #059669;
+}
+
+/* Dark mode support */
+.dark .share-preview {
+  background: #374151;
+}
+
+.dark .share-preview h4 {
+  color: #f3f4f6;
+}
+
+.dark .share-preview p {
+  color: #d1d5db;
+}
+
+.dark .share-link {
+  background: #374151;
+}
+
+.dark .share-link label {
+  color: #f3f4f6;
+}
+
+.dark .link-input {
+  background: #4b5563;
+  color: #f3f4f6;
+  border-color: #6b7280;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .share-modal {
+    margin: 20px;
+    max-width: none;
+  }
+  
+  .share-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .link-container {
+    flex-direction: column;
+  }
+  
+  .copy-button {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .share-button {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .share-button span {
+    display: none;
+  }
+}

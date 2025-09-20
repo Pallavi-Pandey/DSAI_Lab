@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Brain, Users, Trophy, Play } from 'lucide-react';
-import axios from 'axios';
+import { Play, Users, Trophy, Brain } from 'lucide-react';
+import RecommendedQuizzes from '../components/RecommendedQuizzes';
+import '../components/RecommendedQuizzes.css';
 
 const Home = () => {
   const [stats, setStats] = useState({
@@ -16,18 +17,37 @@ const Home = () => {
 
   const fetchStats = async () => {
     try {
+      console.log('Fetching stats from backend...');
       const [quizzesResponse, leaderboardResponse] = await Promise.all([
-        axios.get('/api/quizzes'),
-        axios.get('/api/leaderboard'),
+        fetch('http://localhost:8000/quizzes'),
+        fetch('http://localhost:8000/leaderboard'),
       ]);
       
-      setStats({
-        totalUsers: leaderboardResponse.data.length,
-        totalQuizzes: quizzesResponse.data.length,
-        totalAttempts: leaderboardResponse.data.reduce((sum, user) => sum + user.quizzes_taken, 0),
-      });
+      console.log('Quiz response status:', quizzesResponse.status);
+      console.log('Leaderboard response status:', leaderboardResponse.status);
+      
+      const quizzesData = await quizzesResponse.json();
+      const leaderboardData = await leaderboardResponse.json();
+      
+      console.log('Quizzes data:', quizzesData);
+      console.log('Leaderboard data:', leaderboardData);
+      
+      const newStats = {
+        totalUsers: leaderboardData.leaderboard?.length || 0,
+        totalQuizzes: quizzesData.quizzes?.length || 0,
+        totalAttempts: leaderboardData.leaderboard?.reduce((acc, user) => acc + (user.quizzes_taken || 0), 0) || 0,
+      };
+      
+      console.log('Calculated stats:', newStats);
+      setStats(newStats);
     } catch (error) {
       console.error('Failed to fetch stats:', error);
+      // Fallback to 0 if API fails
+      setStats({
+        totalUsers: 0,
+        totalQuizzes: 0,
+        totalAttempts: 0,
+      });
     }
   };
 
@@ -114,6 +134,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Recommended Quizzes Section */}
+      <RecommendedQuizzes />
     </div>
   );
 };

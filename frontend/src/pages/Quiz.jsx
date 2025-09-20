@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Clock, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { useAuth } from '../services/AuthContext';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const Quiz = () => {
@@ -18,14 +17,36 @@ const Quiz = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchQuiz = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/quizzes/${id}`);
+      if (response.ok) {
+        const data = await response.json();
+        setQuiz(data);
+        setTimeLeft(data.timeLimit * 60);
+      } else {
+        toast.error('Failed to fetch quiz');
+        navigate('/quizzes');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchQuiz();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
   useEffect(() => {
     if (!isAuthenticated) {
       toast.error('Please login to take quizzes');
       navigate('/quizzes');
-      return;
     }
-    fetchQuiz();
-  }, [id, isAuthenticated, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     let timer;
@@ -41,20 +62,7 @@ const Quiz = () => {
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [quizStarted, timeLeft, quizCompleted]);
-
-  const fetchQuiz = async () => {
-    try {
-      const response = await axios.get(`/api/quizzes/${id}`);
-      setQuiz(response.data);
-      setTimeLeft(response.data.time_limit);
-    } catch (error) {
-      toast.error('Failed to fetch quiz');
-      navigate('/quizzes');
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [quizStarted, timeLeft, quizCompleted, submitQuiz]);
 
   const startQuiz = () => {
     setQuizStarted(true);
@@ -83,18 +91,41 @@ const Quiz = () => {
     if (quizCompleted) return;
     
     try {
-      const submissionData = {
-        answers: Object.entries(answers).map(([questionId, answer]) => ({
-          question_id: parseInt(questionId),
-          answer: answer,
-        })),
-        time_taken: quiz.time_limit - timeLeft,
-      };
+      // Calculate score
+      const correctAnswers = quiz.questions.filter((question, index) => 
+        answers[question.id] === question.correct_answer
+      ).length;
+      const score = Math.round((correctAnswers / quiz.questions.length) * 100);
 
-      const response = await axios.post(`/api/quizzes/${id}/submit`, submissionData);
-      setResult(response.data);
-      setQuizCompleted(true);
-      toast.success('Quiz submitted successfully!');
+      const response = await fetch(`http://localhost:8000/quiz-history`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: 'User',
+          quiz_title: quiz.title,
+          score: score,
+          total_questions: quiz.questions.length,
+          time_taken: (quiz.timeLimit * 60) - timeLeft,
+          completed_at: new Date().toISOString()
+        })
+      });
+      
+      if (response.ok) {
+        const resultData = {
+          quiz_title: quiz.title,
+          total_questions: quiz.questions.length,
+          correct_answers: correctAnswers,
+          incorrect_answers: quiz.questions.length - correctAnswers,
+          time_taken: (quiz.timeLimit * 60) - timeLeft,
+          score: score
+        };
+        setResult(resultData);
+        setQuizCompleted(true);
+        toast.success('Quiz submitted successfully!');
+        navigate('/quiz-results', { state: { results: resultData } });
+      }
     } catch (error) {
       toast.error('Failed to submit quiz');
     }
@@ -277,6 +308,6 @@ const Quiz = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Quiz;
