@@ -1,4 +1,4 @@
-# QuizMaster - Interactive Quiz Platform
+# QuizMania - Interactive Quiz Platform
 
 A modern full-stack quiz application built with FastAPI backend and React frontend, featuring user authentication, real-time leaderboards, and a beautiful responsive interface.
 
