@@ -287,7 +287,7 @@ def get_leaderboard(db: Session = Depends(get_db)):
     return {"leaderboard": leaderboard}
 
 @app.get("/api/quizzes/{quiz_id}", response_model=QuizDetail)
-def get_quiz(quiz_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def get_quiz(quiz_id: int, db: Session = Depends(get_db)):
     quiz = db.query(Quiz).filter(Quiz.id == quiz_id).first()
     if not quiz:
         raise HTTPException(status_code=404, detail="Quiz not found")
@@ -431,6 +431,28 @@ async def search_quizzes(q: str = ""):
            search_term in quiz["category"].lower()
     ]
     return {"quizzes": filtered_quizzes}
+
+@app.post("/quiz-history")
+def submit_quiz_result(quiz_data: dict, db: Session = Depends(get_db)):
+    """Submit quiz result to database"""
+    try:
+        # Create a new quiz result entry
+        quiz_result = QuizResult(
+            user_id=1,  # Default user for demo
+            quiz_id=1,  # We'll need to map from quiz_title to quiz_id later
+            score=quiz_data.get('score', 0),
+            total_questions=quiz_data.get('total_questions', 0),
+            time_taken=quiz_data.get('time_taken', 0),
+            answers=json.dumps(quiz_data.get('answers', {}))
+        )
+        
+        db.add(quiz_result)
+        db.commit()
+        db.refresh(quiz_result)
+        
+        return {"message": "Quiz result submitted successfully", "id": quiz_result.id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to submit quiz result: {str(e)}")
 
 @app.get("/quiz-history/{username}")
 async def get_quiz_history(username: str):

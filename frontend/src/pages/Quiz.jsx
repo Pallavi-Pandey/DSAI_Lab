@@ -19,7 +19,7 @@ const Quiz = () => {
 
   const fetchQuiz = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/quizzes/${id}`);
+      const response = await fetch(`http://localhost:8000/api/quizzes/${id}`);
       if (response.ok) {
         const data = await response.json();
         setQuiz(data);
@@ -62,7 +62,7 @@ const Quiz = () => {
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [quizStarted, timeLeft, quizCompleted, submitQuiz]);
+  }, [quizStarted, timeLeft, quizCompleted]);
 
   const startQuiz = () => {
     setQuizStarted(true);
